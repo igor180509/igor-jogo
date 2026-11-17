@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Desafio da Água</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+<header>
+<h1> Desafio da Água</h1>
+<p>Teste seus conhecimentos sobre economia de água!</p>
+</header>
+
+<div id="quiz">
+<div class="info">
+<span id="question-number">Questão 1 de 10</span>
+<span id="score">Pontos: 0</span>
+</div>
+
+<div class="progress-bar">
+<div id="progress"></div>
+</div>
+
+<h2 id="question">Carregando pergunta...</h2>
+
+<div id="answers">
+<button class="answer" onclick="checkAnswer(0)"></button>
+<button class="answer" onclick="checkAnswer(1)"></button>
+<button class="answer" onclick="checkAnswer(2)"></button>
+</div>
+
+<p id="feedback"></p>
+
+<button id="next-button" onclick="nextQuestion()">
+Próxima questão
+</button>
+</div>
+
+<div id="result" class="hidden">
+<h2> Fim do desafio!</h2>
+<p id="final-score"></p>
+<p id="message"></p>
+<button onclick="restartGame()">Jogar novamente</button>
+</div>
+
+<footer>
+<p> Economizar água é preservar o futuro!</p>
+</footer>
+
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>
