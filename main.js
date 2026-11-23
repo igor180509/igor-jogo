@@ -1,3 +1,5 @@
+// PERGUNTAS DO JOGO
+
 const questions = [
 
 {
@@ -102,16 +104,129 @@ correct: 2
 
 ];
 
+
+// VARIÁVEIS
+
 let currentQuestion = 0;
+
 let score = 0;
 
+
+// ELEMENTOS
+
 const questionElement = document.getElementById("question");
+
 const answerButtons = document.querySelectorAll(".answer");
+
 const questionNumber = document.getElementById("question-number");
+
 const scoreElement = document.getElementById("score");
+
 const feedback = document.getElementById("feedback");
+
 const nextButton = document.getElementById("next-button");
+
 const progress = document.getElementById("progress");
+
+const nicknameInput = document.getElementById("nickname");
+
+nicknameInput.addEventListener("input", () => {
+
+nicknameInput.setCustomValidity("");
+
+});
+
+
+// CONTROLE DAS TELAS
+
+function hideAllScreens() {
+
+const screens = [
+
+"start-screen",
+"nickname-screen",
+"story-screen",
+"quiz-screen",
+"game-over-screen",
+"win-screen",
+"credits-screen"
+
+];
+
+screens.forEach(id => {
+
+document.getElementById(id).classList.add("hidden");
+
+});
+
+}
+
+
+// TELA DE NICKNAME
+
+function showNickname() {
+
+hideAllScreens();
+
+document.getElementById("nickname-screen").classList.remove("hidden");
+
+nicknameInput.focus();
+
+}
+
+
+function startWithNickname(event) {
+
+event.preventDefault();
+
+const nickname = nicknameInput.value.trim();
+
+if (!nickname) {
+
+nicknameInput.setCustomValidity("Digite um nickname para continuar.");
+
+nicknameInput.reportValidity();
+
+return;
+
+}
+
+document.getElementById("player-name").textContent = nickname;
+
+showStory();
+
+}
+
+
+// TELA DA HISTÓRIA
+
+function showStory() {
+
+hideAllScreens();
+
+document.getElementById("story-screen").classList.remove("hidden");
+
+}
+
+
+// COMEÇAR JOGO
+
+function startGame() {
+
+currentQuestion = 0;
+
+score = 0;
+
+hideAllScreens();
+
+document.getElementById("quiz-screen").classList.remove("hidden");
+
+loadQuestion();
+
+}
+
+
+// CARREGAR PERGUNTA
 
 function loadQuestion() {
 
@@ -143,47 +258,69 @@ button.classList.remove("correct", "wrong");
 
 }
 
+
+// ESCOLHER RESPOSTA
+
 function checkAnswer(selected) {
 
 const correctAnswer = questions[currentQuestion].correct;
 
-answerButtons.forEach((button, index) => {
+answerButtons.forEach(button => {
 
 button.disabled = true;
 
-if (index === correctAnswer) {
-button.classList.add("correct");
-}
-
 });
+
+
+// CAMINHO DA VITÓRIA PARCIAL
 
 if (selected === correctAnswer) {
 
 score++;
 
-feedback.textContent = " Muito bem! Resposta correta!";
+scoreElement.textContent = `Pontos: ${score}`;
+
+answerButtons[selected].classList.add("correct");
+
+feedback.textContent = "✅ Resposta correta! Você está salvando Hidrópolis!";
 
 feedback.style.color = "green";
-
-} else {
-
-answerButtons[selected].classList.add("wrong");
-
-feedback.textContent = " Resposta incorreta! Tente aprender com essa questão.";
-
-feedback.style.color = "red";
-
-}
-
-scoreElement.textContent = `Pontos: ${score}`;
 
 nextButton.style.display = "inline-block";
 
 if (currentQuestion === 9) {
-nextButton.textContent = "Ver resultado";
+
+nextButton.textContent = "CONCLUIR MISSÃO";
+
 }
 
 }
+
+
+// CAMINHO DO GAME OVER
+
+else {
+
+answerButtons[selected].classList.add("wrong");
+
+answerButtons[correctAnswer].classList.add("correct");
+
+feedback.textContent = "❌ Você tomou uma decisão errada! A missão falhou.";
+
+feedback.style.color = "red";
+
+setTimeout(() => {
+
+showGameOver();
+
+}, 1800);
+
+}
+
+}
+
+
+// PRÓXIMA PERGUNTA
 
 function nextQuestion() {
 
@@ -195,44 +332,49 @@ loadQuestion();
 
 } else {
 
-showResult();
+showWin();
 
 }
 
 }
 
-function showResult() {
 
-document.getElementById("quiz").classList.add("hidden");
+// FINAL GAME OVER
 
-document.getElementById("result").classList.remove("hidden");
+function showGameOver() {
 
-document.getElementById("final-score").textContent =
-`Você acertou ${score} de 10 questões!`;
+hideAllScreens();
 
-let message = "";
+document.getElementById("game-over-screen").classList.remove("hidden");
 
-if (score <= 3) {
-
-message = "Continue aprendendo! Cada atitude faz diferença para o planeta. ";
-
-} else if (score <= 6) {
-
-message = "Bom trabalho! Você já conhece algumas formas de economizar água! ";
-
-} else if (score <= 9) {
-
-message = "Muito bem! Você sabe bastante sobre preservação da água! ";
-
-} else {
-
-message = "PERFEITO! Você é um verdadeiro defensor da água! ";
+document.getElementById("lost-score").textContent = score;
 
 }
 
-document.getElementById("message").textContent = message;
+
+// FINAL VITÓRIA
+
+function showWin() {
+
+hideAllScreens();
+
+document.getElementById("win-screen").classList.remove("hidden");
 
 }
+
+
+// CRÉDITOS
+
+function showCredits() {
+
+hideAllScreens();
+
+document.getElementById("credits-screen").classList.remove("hidden");
+
+}
+
+
+// REINICIAR JOGO
 
 function restartGame() {
 
@@ -240,14 +382,8 @@ currentQuestion = 0;
 
 score = 0;
 
-document.getElementById("result").classList.add("hidden");
+hideAllScreens();
 
-document.getElementById("quiz").classList.remove("hidden");
-
-nextButton.textContent = "Próxima questão";
-
-loadQuestion();
+document.getElementById("start-screen").classList.remove("hidden");
 
 }
-
-loadQuestion();

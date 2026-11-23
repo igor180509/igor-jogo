@@ -1,58 +1,262 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Desafio da Água</title>
+
+<title>O Último Encanador</title>
+
 <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <div class="container">
 
-<header>
-<h1> Desafio da Água</h1>
-<p>Teste seus conhecimentos sobre economia de água!</p>
-</header>
+<!-- TELA DE ENTRADA -->
 
-<div id="quiz">
+<section id="start-screen">
+
+<h1> O ÚLTIMO ENCANADOR</h1>
+
+<h2>O destino de Hidrópolis está em suas mãos!</h2>
+
+<p>
+Uma cidade, uma crise e um último herói.
+Você está preparado para salvar a água?
+</p>
+
+<button onclick="showNickname()">
+INICIAR JOGO
+</button>
+
+</section>
+
+<!-- NICKNAME DO JOGADOR -->
+
+<section id="nickname-screen" class="hidden">
+
+<h1>SEU NICKNAME</h1>
+
+<p>Digite como você quer ser chamado durante a missão.</p>
+
+<form onsubmit="startWithNickname(event)">
+<label for="nickname">Nickname:</label>
+<input id="nickname" class="nickname-input" type="text" autocomplete="nickname" required>
+<button type="submit">CONTINUAR</button>
+</form>
+
+</section>
+
+
+<!-- HISTÓRIA INICIAL -->
+
+<section id="story-screen" class="hidden">
+
+<h1> A HISTÓRIA</h1>
+
+<p>Bem-vindo, <strong id="player-name"></strong>!</p>
+
+<div class="story">
+
+<p>
+A cidade de Hidrópolis está enfrentando uma
+grave crise de abastecimento de água.
+</p>
+
+<p>
+Durante anos, seus habitantes desperdiçaram
+água sem preocupação. Vazamentos, torneiras
+abertas e banhos demorados fizeram os
+reservatórios chegarem ao limite.
+</p>
+
+<p>
+Você é Carlos, o último encanador da cidade.
+O prefeito confiou a você a missão de salvar
+Hidrópolis.
+</p>
+
+<p>
+Para isso, será necessário tomar decisões
+inteligentes e demonstrar conhecimento
+sobre economia e preservação da água.
+</p>
+
+<h3>
+Cuidado! Uma escolha errada pode acabar
+com sua missão.
+</h3>
+
+</div>
+
+<button onclick="startGame()">
+ACEITAR MISSÃO 🚰
+</button>
+
+</section>
+
+
+<!-- JOGO -->
+
+<section id="quiz-screen" class="hidden">
+
+<h1> DESAFIO DA ÁGUA</h1>
+
 <div class="info">
-<span id="question-number">Questão 1 de 10</span>
-<span id="score">Pontos: 0</span>
+
+<span id="question-number">
+Questão 1 de 10
+</span>
+
+<span id="score">
+Pontos: 0
+</span>
+
 </div>
 
 <div class="progress-bar">
+
 <div id="progress"></div>
+
 </div>
 
-<h2 id="question">Carregando pergunta...</h2>
+<h2 id="question"></h2>
 
 <div id="answers">
+
 <button class="answer" onclick="checkAnswer(0)"></button>
+
 <button class="answer" onclick="checkAnswer(1)"></button>
+
 <button class="answer" onclick="checkAnswer(2)"></button>
+
 </div>
 
 <p id="feedback"></p>
 
 <button id="next-button" onclick="nextQuestion()">
-Próxima questão
+CONTINUAR
 </button>
+
+</section>
+
+
+<!-- GAME OVER -->
+
+<section id="game-over-screen" class="hidden">
+
+<h1>💀 GAME OVER</h1>
+
+<h2>Hidrópolis foi perdida!</h2>
+
+<p>
+Uma decisão incorreta comprometeu o abastecimento
+da cidade.
+</p>
+
+<p>
+Os reservatórios secaram e Carlos não conseguiu
+completar sua missão.
+</p>
+
+<h3>Você acertou <span id="lost-score">0</span> de 10 perguntas.</h3>
+
+<button onclick="restartGame()">
+TENTAR NOVAMENTE
+</button>
+
+<button onclick="showCredits()">
+VER CRÉDITOS
+</button>
+
+</section>
+
+
+<!-- VITÓRIA -->
+
+<section id="win-screen" class="hidden">
+
+<h1> VITÓRIA!</h1>
+
+<h2>Você salvou Hidrópolis!</h2>
+
+<p>
+Parabéns, Carlos!
+</p>
+
+<p>
+Graças às suas decisões inteligentes, os
+desperdícios foram reduzidos e o abastecimento
+de água foi recuperado.
+</p>
+
+<h3>Você acertou todas as 10 perguntas!</h3>
+
+<p>
+A cidade reconhece você como o grande herói
+da preservação da água!
+</p>
+
+<button onclick="showCredits()">
+VER CRÉDITOS
+</button>
+
+</section>
+
+
+<!-- CRÉDITOS -->
+
+<section id="credits-screen" class="hidden">
+
+<h1> CRÉDITOS</h1>
+
+<h2>O ÚLTIMO ENCANADOR</h2>
+
+<p>Um jogo educativo sobre economia de água.</p>
+
+<div class="credits">
+
+<p><strong>Desenvolvimento:</strong></p>
+
+<p>Igor e Bryan</p>
+
+<br>
+
+<p><strong>Programação:</strong></p>
+
+<p>HTML, CSS e JavaScript</p>
+
+<br>
+
+<p><strong>Objetivo:</strong></p>
+
+<p>
+Conscientizar sobre a importância
+da economia e preservação da água.
+</p>
+
+<br>
+
+<h3> A água é um recurso precioso. Preserve!</h3>
+
+<br>
+
+<p>Obrigado por jogar!</p>
+
 </div>
 
-<div id="result" class="hidden">
-<h2> Fim do desafio!</h2>
-<p id="final-score"></p>
-<p id="message"></p>
-<button onclick="restartGame()">Jogar novamente</button>
-</div>
+<button onclick="restartGame()">
+JOGAR NOVAMENTE
+</button>
 
-<footer>
-<p> Economizar água é preservar o futuro!</p>
-</footer>
+</section>
+
 
 </div>
 
 <script src="main.js"></script>
+
 </body>
 </html>

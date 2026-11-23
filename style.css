@@ -5,154 +5,355 @@ box-sizing: border-box;
 }
 
 body {
+
 font-family: Arial, sans-serif;
-background: linear-gradient(135deg, #0077b6, #48cae4);
+
+background: linear-gradient(135deg, #023e8a, #00b4d8);
+
 min-height: 100vh;
+
 display: flex;
+
 justify-content: center;
+
 align-items: center;
+
 padding: 20px;
+
 }
 
 .container {
+
 background: white;
+
 width: 100%;
-max-width: 550px;
-padding: 30px;
+
+max-width: 600px;
+
+padding: 35px;
+
 border-radius: 20px;
-box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+
 text-align: center;
+
+box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+
 }
 
-header h1 {
+
+/* TELAS */
+
+.hidden {
+
+display: none !important;
+
+}
+
+
+/* TÍTULOS */
+
+h1 {
+
 color: #0077b6;
-margin-bottom: 10px;
+
+font-size: 30px;
+
+margin-bottom: 20px;
+
 }
 
-header p {
-color: #555;
-margin-bottom: 30px;
+h2 {
+
+color: #023e8a;
+
+margin-bottom: 20px;
+
 }
+
+h3 {
+
+color: #0077b6;
+
+margin: 20px 0;
+
+}
+
+
+/* TEXTOS */
+
+p {
+
+color: #444;
+
+line-height: 1.6;
+
+margin-bottom: 15px;
+
+}
+
+
+/* BOTÕES */
+
+button {
+
+background: #0077b6;
+
+color: white;
+
+border: none;
+
+padding: 15px 25px;
+
+border-radius: 10px;
+
+font-size: 16px;
+
+cursor: pointer;
+
+margin-top: 15px;
+
+transition: 0.3s;
+
+}
+
+button:hover {
+
+background: #023e8a;
+
+transform: scale(1.04);
+
+}
+
+
+/* NICKNAME */
+
+.nickname-input {
+
+display: block;
+
+width: 100%;
+
+padding: 12px;
+
+margin-top: 8px;
+
+border: 2px solid #00b4d8;
+
+border-radius: 8px;
+
+font-size: 16px;
+
+}
+
+
+/* HISTÓRIA */
+
+.story {
+
+background: #eafaff;
+
+border-left: 5px solid #00b4d8;
+
+padding: 20px;
+
+border-radius: 10px;
+
+text-align: left;
+
+margin: 20px 0;
+
+}
+
+
+/* INFORMAÇÕES DO QUIZ */
 
 .info {
+
 display: flex;
+
 justify-content: space-between;
+
 color: #0077b6;
+
 font-weight: bold;
+
 margin-bottom: 15px;
+
 }
 
+
+/* BARRA DE PROGRESSO */
+
 .progress-bar {
+
 width: 100%;
-height: 10px;
+
+height: 12px;
+
 background: #dbeafe;
+
 border-radius: 10px;
+
 margin-bottom: 25px;
+
 overflow: hidden;
+
 }
 
 #progress {
-width: 10%;
+
+width: 0%;
+
 height: 100%;
+
 background: #00b4d8;
-transition: width 0.3s;
+
+transition: width 0.4s;
+
 }
 
-h2 {
-color: #023e8a;
-margin-bottom: 25px;
-font-size: 21px;
-}
+
+/* ALTERNATIVAS */
 
 #answers {
+
 display: flex;
+
 flex-direction: column;
+
 gap: 12px;
+
 }
 
 .answer {
-padding: 15px;
+
+width: 100%;
+
+background: #eafaff;
+
+color: #023e8a;
+
 border: 2px solid #90e0ef;
-background: #f0fbff;
-border-radius: 10px;
-cursor: pointer;
-font-size: 16px;
-transition: 0.3s;
+
+margin: 0;
+
 }
 
 .answer:hover:not(:disabled) {
+
 background: #caf0f8;
-transform: scale(1.02);
+
 }
 
 .answer:disabled {
+
 cursor: not-allowed;
+
+opacity: 1;
+
 }
 
+
+/* RESPOSTAS */
+
 .correct {
+
 background: #90ee90 !important;
-border-color: #28a745;
+
+border-color: green !important;
+
+color: #064d06 !important;
+
 }
 
 .wrong {
+
 background: #ffb3b3 !important;
-border-color: #dc3545;
+
+border-color: red !important;
+
+color: #8b0000 !important;
+
 }
+
+
+/* FEEDBACK */
 
 #feedback {
+
 margin-top: 20px;
+
 font-weight: bold;
-min-height: 25px;
+
 }
 
-#next-button,
-#result button {
-background: #0077b6;
-color: white;
-border: none;
-padding: 14px 25px;
-border-radius: 10px;
-cursor: pointer;
-font-size: 16px;
+
+/* CONTINUAR */
+
+#next-button {
+
+display: none;
+
+}
+
+
+/* GAME OVER */
+
+#game-over-screen h1 {
+
+color: #dc2626;
+
+font-size: 38px;
+
+}
+
+
+/* VITÓRIA */
+
+#win-screen h1 {
+
+color: #16a34a;
+
+font-size: 40px;
+
+}
+
+
+/* CRÉDITOS */
+
+.credits {
+
+background: #eafaff;
+
+padding: 20px;
+
+border-radius: 12px;
+
 margin-top: 20px;
-display: none;
+
 }
 
-#next-button:hover,
-#result button:hover {
-background: #023e8a;
-}
 
-.hidden {
-display: none;
-}
-
-footer {
-margin-top: 30px;
-color: #0077b6;
-font-size: 14px;
-}
-
-#result p {
-margin: 15px 0;
-font-size: 18px;
-color: #444;
-}
-
-#result button {
-display: inline-block;
-}
+/* RESPONSIVIDADE */
 
 @media (max-width: 480px) {
+
 .container {
-padding: 20px;
+
+padding: 22px;
+
 }
 
-header h1 {
+h1 {
+
 font-size: 25px;
+
 }
 
 h2 {
+
 font-size: 19px;
+
 }
+
 }
